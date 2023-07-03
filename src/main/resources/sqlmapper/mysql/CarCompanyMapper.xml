@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CarCompany">
+
+	<select id="search" parameterType="Map" resultType="Map">
+        select *
+        from factorys
+        where 1 = 1
+        <choose>
+            <when test="search == 'company'">
+                and company like CONCAT(#{name}, '%')
+            </when>
+            <otherwise>
+                and company_id like CONCAT(#{name}, '%')
+            </otherwise>
+        </choose>
+        ;
+    </select>
+
+    <!-- 수정 -->
+    <update id="update" parameterType="Map">
+    update factorys
+    set company = #{company}
+    where company_id = #{company_id}
+    </update>
+
+    <!-- 삭제 -->
+    <delete id="delete" parameterType="Map">
+    delete from factorys
+    where company_id = #{company_id}
+    </delete>
+</mapper>
