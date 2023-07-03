@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.yojulab.study_springboots_gradle.service.HelloWorldWithService;
 
-@Controller
+@Controller // 클라이언트의 요청을 처리하는 결정만 해주고 응답을 보내주는 명령어
 public class HelloWorldController
 {
-    @Autowired
+    @Autowired // 의존 객체의 타입에 해당하는 *[빈]을 찾아 주입하는 역할
+               // 빈(Bean): 스프링이 제어권을 가져서 직접 생성하고 *[의존관계(DI)]를 부여하는 오브젝트
+               // 의존관계(DI): 코드 상 객체를 직접 만드는 것이 아닌 외부에서 객체를 넣어주는 방식
     HelloWorldWithService helloWorldWithService;
 
     @GetMapping("/helloWorld") // Method를 doGet으로 바꾸어주는 명령어
@@ -36,6 +38,7 @@ public class HelloWorldController
     // &perPage=10
     // &SN=1
     // /helloWorldResponse/{1}/{10}/{1}
+    // /helloWorldResponse/1/10/1
     @GetMapping("/helloWorldResponse/{currentPage}/{perPage}/{SN}")
     public ResponseEntity<Object> helloWorldResponse(@PathVariable String currentPage, @PathVariable String perPage, @PathVariable String SN)
     {
@@ -49,6 +52,7 @@ public class HelloWorldController
         return ResponseEntity.ok().body(resultMap);
     }
 
+    // http://192.168.0.40:8080/helloWorldResponseList/1/10/1
     @GetMapping("/helloWorldResponseList/{currentPage}/{perPage}/{SN}")
     public ResponseEntity<Object> helloWorldResponseList(@PathVariable String currentPage, @PathVariable String perPage, @PathVariable String SN)
     {
@@ -77,6 +81,15 @@ public class HelloWorldController
     {
         ArrayList arrayList = new ArrayList<>();
         arrayList = helloWorldWithService.fakeSelect(currentPage, perPage);
+        return ResponseEntity.ok().body(arrayList);
+    }
+
+    // /helloWorldResponseFake/C001
+    @GetMapping("/helloWorldResponseFake/{companyId}")
+    public ResponseEntity<Object> helloWorldResponseFake(@PathVariable String companyId)
+    {
+        ArrayList arrayList = new ArrayList<>();
+        helloWorldWithService.fakeSelect(companyId);
         return ResponseEntity.ok().body(arrayList);
     }
 }
