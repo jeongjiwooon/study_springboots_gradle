@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yojulab.study_springboots_gradle.service.CarCompanyService;
-import com.yojulab.study_springboots_gradle.service.CarInforsService;
 
 @RestController
 public class CarCompanyController
