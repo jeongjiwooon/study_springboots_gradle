@@ -4,9 +4,21 @@
     <!-- 전체 -->
     <!-- #{변수명} -->
 	<select id="selectAll" parameterType="Map" resultType="Map">
-    select *
-    from car_infors
-    where 1 = 1
+        select *
+        from car_infors
+        where 1 = 1
+	</select>
+
+    <!-- mybatis foreach Map("car_infor_id_list", car_infor_id_list)-->
+	<select id="selectInUID" parameterType="Map" resultType="Map">
+        select *
+        from car_infors
+        where 1 = 1
+        and car_infor_id in
+
+        <foreach item="car_infor_id" index="index" collection="car_infor_id_list" open="(" separator="," close=")" nullable="true">
+            #{car_infor_id}
+        </foreach>
 	</select>
 
     <!-- 검색 -->

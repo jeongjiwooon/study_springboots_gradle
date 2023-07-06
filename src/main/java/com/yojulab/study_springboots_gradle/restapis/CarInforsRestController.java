@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.yojulab.study_springboots_gradle.service.CarInforsService;
 
 @RestController
-public class CarInforsController
+public class CarInforsRestController
 {
     @Autowired
     CarInforsService carInforsService;
@@ -73,6 +73,22 @@ public class CarInforsController
         {
             result = carInforsService.insertDouble(paramMap);
         }
+        catch (Exception e)
+        {
+            return ResponseEntity.badRequest().body(result);
+        }
+        return ResponseEntity.ok().body(result);
+    }
+
+    @GetMapping("/selectInUID")
+    public ResponseEntity selectInUID(@RequestBody Map paramMap)
+    {
+        Object result = null;
+        try
+        {
+            result = carInforsService.selectInUID(paramMap);
+        }
+        
         catch (Exception e)
         {
             return ResponseEntity.badRequest().body(result);

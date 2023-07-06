@@ -15,6 +15,14 @@ public class CarInforsService
     @Autowired
     SharedDao sharedDao;
 
+    public Object selectSearch(Map dataMap)
+    {
+        String sqlMapId = "CarInfors.selectSearch";
+
+        Object result = sharedDao.getList(sqlMapId, dataMap);
+        return result;
+    }
+
     public Object selectSearch(String search, String words)
     {
         String sqlMapId = "CarInfors.selectSearch";
@@ -80,6 +88,15 @@ public class CarInforsService
         Object result = sharedDao.insert(sqlMapId, dataMap);
 
         result = sharedDao.insert(sqlMapId, dataMap);
+        return result;
+    }
+
+    // foreach Map("car_infor_id_list", car_infor_id_list)
+    public Object selectInUID(Map dataMap)
+    {
+        String sqlMapId = "CarInfors.selectInUID";
+
+        Object result = sharedDao.getList(sqlMapId, dataMap);
         return result;
     }
 }
