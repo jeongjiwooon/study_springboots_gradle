@@ -45,6 +45,28 @@ public class CarInforsController
         return modelAndView;
     }
 
+    // delete with MVC
+    @PostMapping("/delete")
+    public ModelAndView delete(@RequestParam Map params, ModelAndView modelAndView)
+    {
+        Object result = carInforsService.delete(params);
+        modelAndView.addObject("params", params);
+
+        modelAndView.setViewName("/WEB-INF/views/carinfor/list.jsp");
+        return modelAndView;
+    }
+
+    // delete with MVC
+    @PostMapping("/deleteAndSelectSearch")
+    public ModelAndView deleteAndSelectSearch(@RequestParam Map params, ModelAndView modelAndView)
+    {
+        Object result = carInforsService.deleteAndSelectSearch(params);
+        modelAndView.addObject("params", params);
+
+        modelAndView.setViewName("/WEB-INF/views/carinfor/list.jsp");
+        return modelAndView;
+    }
+
     // /selectDetail/CI002
     @GetMapping("/selectDetail/{car_infor_id}")
     public ResponseEntity selectDetail(@PathVariable String car_infor_id)
@@ -64,13 +86,6 @@ public class CarInforsController
     public ResponseEntity update(@RequestBody Map paramMap)
     {
         Object result = carInforsService.update(paramMap);
-        return ResponseEntity.ok().body(result);
-    }
-
-    @DeleteMapping("/delete/{car_infor_id}")
-    public ResponseEntity delete(@PathVariable String car_infor_id)
-    {
-        Object result = carInforsService.delete(car_infor_id);
         return ResponseEntity.ok().body(result);
     }
 

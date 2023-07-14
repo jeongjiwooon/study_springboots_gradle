@@ -30,9 +30,9 @@
             <when test="search == 'year'">
                 <![CDATA[and year > #{words}]]>
             </when>
-            <otherwise>
+            <when test="search == 'year'">
                 and car_name like CONCAT(#{words}, '%')
-            </otherwise>
+            </when>
         </choose>
         ;
     </select>

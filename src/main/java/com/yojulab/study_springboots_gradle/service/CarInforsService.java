@@ -70,6 +70,33 @@ public class CarInforsService
         return result;
     }
 
+    // MVC view
+    public Object delete(Map dataMap)
+    {
+        HashMap result = new HashMap<>();
+        String sqlMapId = "CarInfors.delete";
+        result.put("deleteCount", sharedDao.delete(sqlMapId, dataMap));
+
+        sqlMapId = "CarInfors.selectDetail";
+        result.put("resultList", sharedDao.getOne(sqlMapId, dataMap));
+        return result;
+    }
+
+    // MVC view
+    public Object deleteAndSelectSearch(Map dataMap)
+    {
+        HashMap result = new HashMap<>();
+        // String sqlMapId = "CarInfors.delete";
+        // result.put("deleteCount", sharedDao.delete(sqlMapId, dataMap));
+        result.put("deleteCount", this.delete(dataMap));
+
+        // sqlMapId = "CarInfors.selectDetail";
+        // result.put("resultList", sharedDao.getOne(sqlMapId, dataMap));
+        result.put("resultList", this.selectSearch(dataMap));
+        return result;
+    }
+
+    // rest api
     public Object delete(String car_infor_id)
     {
         HashMap dataMap = new HashMap<>();

@@ -39,6 +39,8 @@
     <%
         HashMap params = (HashMap)request.getAttribute("params");
         String searchStr = (String)params.getOrDefault("search", "");
+
+        HashMap result = (HashMap)request.getAttribute("result");
     %>
     <!-- Main Content -->
     <div class="container mt-4">
@@ -69,7 +71,7 @@
                     </thead>
                     <tbody id="carTableBody">
                         <%
-                            ArrayList resultList = (ArrayList)request.getAttribute("result");
+                            ArrayList resultList = (ArrayList)result.get("resultList");
                             for(int i = 0; i<resultList.size(); i++)
                             {
                                 HashMap record = (HashMap)resultList.get(i);
