@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MainController
 {
-    @GetMapping({"/", "/home", "main"})
+    @GetMapping({"/", "/home", "/main"})
     public ModelAndView main(ModelAndView modelAndView)
     {
         modelAndView.addObject("name", "jeongjiwoon");
